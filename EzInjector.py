@@ -1,3 +1,27 @@
+import subprocess
+import sys
+import importlib
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+required_modules = [
+    "customtkinter",
+    "psutil",
+    "requests",
+    "threading",
+    "tkinter"
+]
+
+for module in required_modules:
+    try:
+        importlib.import_module(module)
+    except ImportError:
+        print(f"{module} not found. Installing...")
+        install(module)
+    else:
+        print(f"{module} is already installed.")
+
 import customtkinter as ctk
 import psutil
 import threading
